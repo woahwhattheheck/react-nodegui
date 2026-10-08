@@ -604,7 +604,7 @@ function serializeAttributes(tagName: string, props: SvgProps | SvgElementProps)
       return result;
     }
 
-    result.push(value === true ? attributeName : `${attributeName}="${escapeAttribute(attributeValue)}"`);
+    result.push(`${attributeName}="${escapeAttribute(attributeValue)}"`);
     return result;
   }, [] as string[]);
 
