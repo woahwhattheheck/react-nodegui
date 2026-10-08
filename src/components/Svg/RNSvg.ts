@@ -591,7 +591,7 @@ function serializeAttributes(tagName: string, props: SvgProps | SvgElementProps)
 
     const value = (props as Record<string, SvgPropValue>)[key];
 
-    if (value === null || value === undefined || value === false) {
+    if (value === null || value === undefined) {
       return result;
     }
 

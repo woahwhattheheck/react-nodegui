@@ -316,6 +316,24 @@ async function verifyMixedTextUpdate() {
   });
 }
 
+function verifyBooleanAttributes() {
+  const element = createSvgElement("rect", {
+    focusable: false,
+    requiredExtensions: true,
+  });
+  const svg = element.toSvgString();
+
+  assert(
+    svg.includes('focusable="false"'),
+    "False-valued SVG attribute was dropped"
+  );
+  assert(
+    svg.includes('requiredExtensions="true"'),
+    "True-valued SVG attribute was not quoted"
+  );
+  console.log("boolean-attributes: PASS");
+}
+
 function verifyReorderMove() {
   const root = new RNSvg();
   root.setProps({ width: 100, height: 40, viewBox: "0 0 100 40" }, {});
@@ -350,6 +368,7 @@ async function main() {
     await verifyAdjacentText();
     await verifyMixedTspan();
     await verifyMixedTextUpdate();
+    verifyBooleanAttributes();
     verifyReorderMove();
 
     assert(warnings.length === 0, `Unexpected warnings: ${warnings.join(" | ")}`);
